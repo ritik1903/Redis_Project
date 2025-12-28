@@ -63,13 +63,31 @@ async function hashmapDemo() {
         console.log("User 2 age:", fetchUser2);
 }
 
+async function redisStreamDemo() {
+    await client.xadd('mystream', '*', 'field1', 'value1', 'field2', 'value2');
+    await client.xadd('mystream', '*', 'field1', 'value3', 'field2', 'value4');
+    const streamEntries = await client.xrange('mystream', '-', '+');
+    console.log("Stream entries:", streamEntries);
+}
+
+async function geospatialDemo() {
+    await client.geoadd('locations', 13.361389, 38.115556, 'Palermo');
+    await client.geoadd('locations', 15.087269, 37.502669, 'Catania');
+    const distance = await client.geodist('locations', 'Palermo', 'Catania', 'km');
+    console.log("Distance between Palermo and Catania:", distance, "km");
+}
+
 async function runDemos() {
     await init();
     await stringDemo();
     await listDemo();
     await setDemo();    
     await hashmapDemo();
+    await redisStreamDemo();
+    await geospatialDemo();
 }
+
+
 
 
 runDemos();

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ritik1903/Redis_Project#readme",
   "dependencies": {
+    "axios": "^1.13.2",
+    "express": "^5.2.1",
     "ioredis": "^5.8.2"
   }
 }
